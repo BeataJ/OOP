@@ -1,3 +1,5 @@
+import csv
+
 class Item:
     pay_rate = 0.8 # the pay rate after 20% discount
     all = []
@@ -20,11 +22,21 @@ class Item:
     def apply_discount(self):
         self.price = self.price * self.pay_rate
     
-    def instantiate_form_csv(self):
-        pass
+    @classmethod
+    def instantiate_form_csv(cls):
+        with open('items.csv', 'r') as f:
+            reader = csv.DictReader(f)
+            items = list(reader)
+        for item in  items:
+            Item(
+                name=item.get('name'),
+                price=int(item.get('price')),
+                quantity=int(item.get('quantity')),              
+            ) 
     
     def __repr__(self) -> str:
         return f"Item('{self.name}', {self.price}, {self.quantity})"             
 
 
 Item.instantiate_form_csv()
+print(Item.all)
