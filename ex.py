@@ -30,13 +30,21 @@ class Item:
         for item in  items:
             Item(
                 name=item.get('name'),
-                price=int(item.get('price')),
+                price=float(item.get('price')),
                 quantity=int(item.get('quantity')),              
             ) 
+     
+    @staticmethod        
+    def is_integer(num):
+        if isinstance(num, float):
+           return num.is_integer() 
+        elif isinstance(num, int):
+            return True
+        else:
+            return False      
     
     def __repr__(self) -> str:
         return f"Item('{self.name}', {self.price}, {self.quantity})"             
 
 
-Item.instantiate_form_csv()
-print(Item.all)
+print(Item.is_integer(7))
