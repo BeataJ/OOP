@@ -27,6 +27,7 @@ class Item:
         with open('items.csv', 'r') as f:
             reader = csv.DictReader(f)
             items = list(reader)
+            
         for item in  items:
             Item(
                 name=item.get('name'),
@@ -47,4 +48,28 @@ class Item:
         return f"Item('{self.name}', {self.price}, {self.quantity})"             
 
 
-print(Item.is_integer(7))
+class Phone(Item):
+    all = []
+    def __init__(self, name: str, price: float, quantity=0, broken_phones=0) -> None:
+        # Run validations to the received argument
+        assert price >= 0, f'Price {price} is not greater than or equal zero'
+        assert quantity >= 0, f'Quantity {quantity} is not greater than or equal zero'
+        assert broken_phones >= 0, f'Broken Phones {broken_phones} is not greater than or equal zero'
+
+
+        # Assign to self object
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.broken_phones = broken_phones
+        
+        # Action to execute
+        Phone.all.append(self)
+
+phone1 = Item("jscPhonev10", 500, 5)
+# print(phone1.calculate_total_price())
+phone2 = Item("jscPhonev20", 700, 5)
+
+Item.instantiate_form_csv()
+print(Item.all)
+
