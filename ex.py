@@ -45,31 +45,32 @@ class Item:
             return False      
     
     def __repr__(self) -> str:
-        return f"Item('{self.name}', {self.price}, {self.quantity})"             
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"             
 
 
 class Phone(Item):
-    all = []
     def __init__(self, name: str, price: float, quantity=0, broken_phones=0) -> None:
+        # Call to super function to have to all attributes / method
+        super().__init__(
+            name, price, quantity
+        )
+        
         # Run validations to the received argument
-        assert price >= 0, f'Price {price} is not greater than or equal zero'
-        assert quantity >= 0, f'Quantity {quantity} is not greater than or equal zero'
         assert broken_phones >= 0, f'Broken Phones {broken_phones} is not greater than or equal zero'
 
 
         # Assign to self object
-        self.name = name
-        self.price = price
-        self.quantity = quantity
         self.broken_phones = broken_phones
         
-        # Action to execute
-        Phone.all.append(self)
+        
+        def __repr__(self) -> str:
+            return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.broken_phones})" 
 
-phone1 = Item("jscPhonev10", 500, 5)
-# print(phone1.calculate_total_price())
-phone2 = Item("jscPhonev20", 700, 5)
+phone1 = Phone("jscPhonev10", 500, 5, 1)
+print(phone1.calculate_total_price())
+phone2 = Phone("jscPhonev20", 700, 5, 1)
 
-Item.instantiate_form_csv()
+# Item.instantiate_form_csv()
 print(Item.all)
+
 
