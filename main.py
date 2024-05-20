@@ -1,9 +1,12 @@
 from item import Item
-from phone import Phone
 
-Item.instantiate_form_csv()
+item1 = Item("MyItem", 750)
 
-print(Item.all)
+item1.name = "otherItem" 
+
+print(item1.name)
+
+
 
 
 
