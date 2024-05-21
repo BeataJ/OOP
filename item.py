@@ -67,4 +67,20 @@ class Item:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}('{self.name}', {self.__price}, {self.quantity})"             
 
-    
+    def __connect(self, smpt_server):
+        pass
+
+    def __prepare_body(self):
+        return f"""
+        Hello Someone
+        We have {self.name} {self.quantity} times.
+        Regards, JimShapedCoding
+        """ 
+        
+    def __send(self):
+        pass       
+
+    def send_email(self):
+        self.__connect("")
+        self.__prepare_body()
+        self.__send()
